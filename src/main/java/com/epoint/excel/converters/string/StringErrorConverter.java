@@ -1,0 +1,37 @@
+package com.epoint.excel.converters.string;
+
+import com.epoint.excel.converters.Converter;
+import com.epoint.excel.enums.CellDataTypeEnum;
+import com.epoint.excel.metadata.CellData;
+import com.epoint.excel.metadata.GlobalConfiguration;
+import com.epoint.excel.metadata.property.ExcelContentProperty;
+
+/**
+ * String and error converter
+ *
+ * @author Jiaju Zhuang
+ */
+public class StringErrorConverter implements Converter<String> {
+    @Override
+    public Class supportJavaTypeKey() {
+        return String.class;
+    }
+
+    @Override
+    public CellDataTypeEnum supportExcelTypeKey() {
+        return CellDataTypeEnum.ERROR;
+    }
+
+    @Override
+    public String convertToJavaData(CellData cellData, ExcelContentProperty contentProperty,
+        GlobalConfiguration globalConfiguration) {
+        return cellData.getStringValue();
+    }
+
+    @Override
+    public CellData convertToExcelData(String value, ExcelContentProperty contentProperty,
+        GlobalConfiguration globalConfiguration) {
+        return new CellData(CellDataTypeEnum.ERROR, value);
+    }
+
+}
